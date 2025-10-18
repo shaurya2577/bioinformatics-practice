@@ -36,3 +36,14 @@ print(results)
 # Display significant genes (p < 0.05)
 sig_genes <- results[results$P_Value < 0.05, ]
 print(paste("\nSignificant genes:", nrow(sig_genes)))
+
+# Apply FDR correction (Benjamini-Hochberg)
+results$Adjusted_P <- p.adjust(results$P_Value, method = "BH")
+
+# Display results with FDR
+print("\nResults with FDR correction:")
+print(results)
+
+# Display significant genes (FDR < 0.05)
+sig_genes_fdr <- results[results$Adjusted_P < 0.05, ]
+print(paste("\nSignificant genes (FDR < 0.05):", nrow(sig_genes_fdr)))
